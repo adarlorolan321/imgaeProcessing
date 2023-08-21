@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\OCRController;
 use App\Http\Controllers\ProfileController;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +24,13 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', function () {
   return Inertia::render('login');
 });
+Route::get('/remove-background', function () {
+  return view('image');
+});
 
+Route::post('/ocr', [OCRController::class,'performOCR']);
 
+Route::post('/convert-to-pdf', [ImageController::class, 'convertToPDF'])->name('convert');
 
 Route::middleware('auth')->group(function () {
     
