@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OCRController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Resolution\ResolutionController;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,9 +25,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', function () {
   return Inertia::render('login');
 });
-Route::get('/remove-background', function () {
-  return view('image');
-});
+
 
 Route::post('/ocr', [OCRController::class,'performOCR']);
 
@@ -39,5 +38,15 @@ Route::middleware('auth')->group(function () {
     });
     Route::resource('profile', ProfileController::class);
     Route::resource('dashboard', DashboardController::class);
+    Route::resource('resolutions', ResolutionController::class);
+    Route::post('resolutions-view', [ResolutionController::class, 'view'])->name('resolutions_view');
+    
+});
+
+Route::post('print_supplies', [SupplyController::class, 'print'])->name('print_supplies');
+
+Route::get('resolutions-view/{id}', function () {
+  $pdf = PDF::loadView('image', ['data' => 'test']);
+  return $pdf->stream('test-pdf.pdf');
 });
 require __DIR__ . '/auth.php';

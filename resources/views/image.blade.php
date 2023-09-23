@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>PDF Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tesda</title>
 </head>
+
 <body>
-    <p>
-        {!! nl2br(e($text)) !!}
-    </p>
+    <div class="title">INVENTORY CUSTODIAN SLIP</div>
+    
+    <!-- Display the HTML content from $data->description -->
+    {!! $data->description !!}
 </body>
+
 </html>
