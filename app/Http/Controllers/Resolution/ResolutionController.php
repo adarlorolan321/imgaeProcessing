@@ -118,16 +118,28 @@ class ResolutionController extends Controller
 
     public function view(Request $request)
 {
+    // $data = Resolution::findOrFail($request->id);
+
+    // // Assuming $data->description contains the HTML content
+    // $htmlContent = $data->description;
+
+    // // Create a PDF instance and load the HTML content
+    // $pdf = PDF::loadHTML($htmlContent);
+
+    // // Use the stream method to display the PDF in the browser
+    // return $pdf->stream('report.pdf');
+
+
     $data = Resolution::findOrFail($request->id);
+    $photos = json_decode($data->photo, true);
 
-    // Assuming $data->description contains the HTML content
-    $htmlContent = $data->description;
-
-    // Create a PDF instance and load the HTML content
-    $pdf = PDF::loadHTML($htmlContent);
+    // dd($photos);
+    // Create a PDF instance
+    $pdf = PDF::loadView('pdf_template', compact('photos'));
 
     // Use the stream method to display the PDF in the browser
     return $pdf->stream('report.pdf');
+    
 }
 
     /**
