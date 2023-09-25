@@ -41,10 +41,22 @@ const { appRouteTransition } = useThemeConfig();
             :href="route('resolutions.index')"
           />
           <VListItem
-            :class="route().current() == 'dashboard.index' ? 'active' : ''"
+            :class="route().current() == 'ordinances.index' ? 'active' : ''"
             prepend-icon="mdi-file-document"
             title="Ordinance"
-            :href="route('dashboard.index')"
+            :href="route('ordinances.index')"
+          />
+          <VListItem
+           
+            prepend-icon="mdi-file-document"
+            title="Article"
+            
+          />
+          <VListItem
+           
+            prepend-icon="mdi-file-document"
+            title="Minutes"
+            
           />
 
           <VListItem prepend-icon="mdi-account-box" title="Account" />

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Resolution;
+namespace App\Http\Requests\Ordinance;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreResolutionRequest extends FormRequest
+class StoreOrdinanceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class StoreResolutionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => ["required"], "resolution_no" => ["required"], "date" => ["required"], "term" => ["required"], "description" => ["nullable"], "photo" => ["nullable"], "status" => ["required"]
+            "status" => ["required"],"title" => ["required"],"description" => ["nullable"],"date" => ["required"],"term" => ["required"],"ordinance_no" => ["required"],"photo" => ["nullable"],
         ];
     }
 }

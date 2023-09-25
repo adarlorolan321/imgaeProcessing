@@ -11,7 +11,7 @@ class UpdateResolutionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->can("update resolution");
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateResolutionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => ["required"],"date" => ["required"],"term" => ["required"],"description" => ["required"],
+            "title" => ["required"],"resolution_no"=> ["required"], "date" => ["required"],"term" => ["required"],"description" => ["nullable"],"photo" => ["nullable"],
         ];
     }
 }

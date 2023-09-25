@@ -1,32 +1,26 @@
 <?php
 
-namespace App\Models\Resolution;
+namespace App\Models\Ordinance;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Resolution extends Model implements HasMedia
+class Ordinance extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-        "date", "term", "description", "title", "photo", "status", "resolution_no"
+        "status","title","description","date","term","ordinance_no","photo",
     ];
-
     protected $appends = [
         'file_url',
         
     ];
-
-    // protected $hidden = [
-    //     'media'
-    // ];
-
     public function getFileUrlAttribute()
     {
-      $media = $this->getMedia('resolutions');
+      $media = $this->getMedia('ordinances');
     
     if ($media->isEmpty()) {
         return null;
@@ -39,7 +33,4 @@ class Resolution extends Model implements HasMedia
     return $urls;
     }
 
-    
-
-    
 }

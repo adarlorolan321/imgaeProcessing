@@ -3,10 +3,10 @@ import Layout from "@/layouts/default.vue";
 import { useTheme } from "vuetify";
 import Tesseract from "tesseract.js";
 import { createWorker } from "tesseract.js";
-import { ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { PDFDocument, StandardFonts } from "pdf-lib";
 import axios from "axios";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import textEditor from "../components/textEditor.vue";
 import Dropzone from "../components/Dropzone.vue";
 const vuetifyTheme = useTheme();
@@ -20,13 +20,19 @@ const progress = ref(null);
 const refForm = ref();
 const scan = ref(false);
 const isPerformingOCR = ref(false);
+
+const data = computed(() => usePage().props.data);
 const handleImageUpload = (event) => {
   image.value = event.target.files[0];
   imagename.value = event.target.files[0].name;
   form.description.value = "";
 };
 
-const performOCR = async () => {
+
+
+
+
+async function performOCR() {
   if (!image) {
     return;
   }
@@ -50,23 +56,23 @@ const performOCR = async () => {
     isPerformingOCR.value = false;
     await worker.terminate();
   })();
-};
+}
 
 const form = useForm({
-  status: "New",
-  title: null,
-  description: null,
-  date: null,
-  term: null,
-  resolution_no: null,
-  photo: [],
+  status: data.value.status,
+  title: data.value.title,
+  description: data.value.description,
+  date: data.value.date,
+  term: data.value.term,
+  ordinance_no: data.value.ordinance_no,
+  photo: JSON.parse(data.value.photo),
 });
 
 const submit = () => {
   refForm?.value?.validate().then((res) => {
     const { valid: isValid } = res;
     if (isValid) {
-      form.post("/resolutions", {
+      form.patch(route("ordinances.update", data.value.id), {
         preserveScroll: true,
         preserveState: true,
         onSuccess: (data) => {
@@ -88,6 +94,7 @@ export default {
   data() {
     return {
       content: "",
+      isLoaded: false,
       editorSettings: {
         plugins: [
           "advlist",
@@ -117,7 +124,14 @@ export default {
           "body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
       },
     };
+
   },
+  mounted() {
+    setTimeout(() => {
+        this.isLoaded = true;
+    }, 3000)
+    
+  }
 };
 </script>
 
@@ -134,6 +148,7 @@ export default {
         <v-col cols="12">
           <VSelect
             type="status"
+            disabled
             :items="['New', 'Old']"
             v-model="form.status"
             :rules="[requiredValidator, alphaDashValidator]"
@@ -161,11 +176,11 @@ export default {
         </v-col>
         <v-col cols="12">
           <VTextField
-            type="resolution_no"
-            v-model="form.resolution_no"
+            type="ordinance_no"
+            v-model="form.ordinance_no"
             :rules="[requiredValidator, alphaDashValidator]"
-            label="Resolution No."
-            :error-messages="form.errors.resolution_no"
+            label="Ordinance No."
+            :error-messages="form.errors.ordinance_no"
           />
         </v-col>
         <v-col cols="12">
@@ -183,8 +198,9 @@ export default {
         <v-col cols="12" v-else>
           <VCard>
             <Dropzone
+              v-if="isLoaded"
               class="bg-white p-8 rounded-lg shadow-lg mb-2"
-              collection="resolutions"
+              collection="ordinances"
               :url="route('api.media.upload')"
               :value="form.photo"
               @input="

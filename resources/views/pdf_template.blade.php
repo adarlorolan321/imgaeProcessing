@@ -8,7 +8,7 @@
     @foreach ($photos as $photo)
     <div style="page-break-after: always;">
     
-        <img src="{{ $photo['url'] }}" alt="Image" style="width: 720pt; height: 1020pt; object-fit: cover;">
+        <img src="{{ $photo }}" alt="Image" style="width: 720pt; height: 1020pt; object-fit: cover;">
     </div>
     @endforeach
 </body>

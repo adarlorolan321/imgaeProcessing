@@ -58,7 +58,7 @@ const form = useForm({
   description: null,
   date: null,
   term: null,
-  resolution_no: null,
+  ordinance_no: null,
   photo: [],
 });
 
@@ -66,7 +66,7 @@ const submit = () => {
   refForm?.value?.validate().then((res) => {
     const { valid: isValid } = res;
     if (isValid) {
-      form.post("/resolutions", {
+      form.post("/ordinances", {
         preserveScroll: true,
         preserveState: true,
         onSuccess: (data) => {
@@ -126,7 +126,7 @@ export default {
     <v-container class="mx-5">
       <v-row>
         <VCol cols="12">
-          <h1>Resolution</h1>
+          <h1>Ordinance</h1>
         </VCol>
       </v-row>
 
@@ -161,11 +161,11 @@ export default {
         </v-col>
         <v-col cols="12">
           <VTextField
-            type="resolution_no"
-            v-model="form.resolution_no"
+            type="ordinance_no"
+            v-model="form.ordinance_no"
             :rules="[requiredValidator, alphaDashValidator]"
-            label="Resolution No."
-            :error-messages="form.errors.resolution_no"
+            label="Ordinance No."
+            :error-messages="form.errors.ordinance_no"
           />
         </v-col>
         <v-col cols="12">
@@ -184,7 +184,7 @@ export default {
           <VCard>
             <Dropzone
               class="bg-white p-8 rounded-lg shadow-lg mb-2"
-              collection="resolutions"
+              collection="ordinances"
               :url="route('api.media.upload')"
               :value="form.photo"
               @input="
@@ -200,7 +200,7 @@ export default {
                   }
                 }
               "
-              model="Resolution\Resolution"
+              model="Ordinance\Ordinance"
               message="Drop files here or click to upload profile photo"
               acceptedFiles="image/jpeg,image/png"
             ></Dropzone>

@@ -297,6 +297,9 @@ export default {
 }
 
 
+
+
+
 .dropzone-profile-photo .dz-preview {
     margin: 0px;
 }

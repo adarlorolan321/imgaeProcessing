@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resolutions', function (Blueprint $table) {
+        Schema::create('ordinances', function (Blueprint $table) {
             $table->id();
+            $table->string('status');
             $table->string('title');
+            $table->longText('description')->nullable();
             $table->string('date');
             $table->string('term');
-            $table->string('status');
-            $table->longText('resolution_no')->nullable();
-            $table->longText('description')->nullable();
+            $table->string('ordinance_no');
             $table->longText('photo')->nullable();
             $table->timestamps();
         });
@@ -29,8 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('resolutions', function (Blueprint $table) {
-            Schema::dropIfExists('resolutions');
+        Schema::table('ordinances', function (Blueprint $table) {
+            Schema::dropIfExists('ordinances');
         });
     }
 };

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OCRController;
+use App\Http\Controllers\Ordinance\OrdinanceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Resolution\ResolutionController;
 use App\Providers\RouteServiceProvider;
@@ -40,6 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('resolutions', ResolutionController::class);
     Route::post('resolutions-view', [ResolutionController::class, 'view'])->name('resolutions_view');
+
+    Route::resource('ordinances', OrdinanceController::class);
+    Route::post('ordinances-view', [OrdinanceController::class, 'view'])->name('ordinances_view');
     
 });
 

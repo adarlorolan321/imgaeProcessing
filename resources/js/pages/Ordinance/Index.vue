@@ -4,11 +4,11 @@ import Layout from "@/layouts/default.vue";
 import { useCrud } from "@/Composables/Crud.js";
 import { router } from "@inertiajs/vue3";
 import axios from 'axios';
-const routeName = "resolutions";
+const routeName = "ordinances";
 
 
 
-const  printRoute = 'resolutions-view';
+const  printRoute = 'ordinances-view';
 
 
 const formObject = {};
@@ -61,9 +61,9 @@ export default {
     <div class="container mx-auto">
       <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
         <div class="card-body p-2">
-          <h3 class="card-title">Resolution</h3>
+          <h3 class="card-title">Ordinance</h3>
           <div class="d-flex justify-end mb-4">
-            <VBtn class="ml-auto" href="/resolutions/create"> Add </VBtn>
+            <VBtn class="ml-auto" href="/ordinances/create"> Add </VBtn>
           </div>
           <div class="d-flex justify-space-between">
             <div class="col-auto">
@@ -124,7 +124,7 @@ export default {
               <td
                 class="text-center px-5 py-3 border-b border-gray-200 bg-white text-sm"
               >
-                {{ item.resolution_no }}
+                {{ item.ordinance_no }}
               </td>
               <td
                 class="text-center px-5 py-3 border-b border-gray-200 bg-white text-sm"
@@ -156,7 +156,7 @@ export default {
                 <a
                  
                   class="text-red-500"
-                  :href="route('resolutions.edit', item.id)"
+                  :href="route('ordinances.edit', item.id)"
                 >
                   <v-icon color="primary" class="text-danger"> mdi-edit </v-icon></a
                 >

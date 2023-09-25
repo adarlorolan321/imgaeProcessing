@@ -12,18 +12,17 @@
     <link rel="preconnect" href="https://fonts.bunny.net" />
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/loader.css" />
-    <link rel="stylesheet" media="screen"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700\|Material+Icons" />
+    <link rel="stylesheet" media="screen" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700\|Material+Icons" />
 
-
-        <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="/dropzone.css">
+    <script src="https://js.stripe.com/v3/"></script>
     <!-- Scripts -->
-   
+
     @routes
 
-@vite(['resources/js/app.js', "resources/js/pages/{$page['component']}.vue"])
+    @vite(['resources/js/app.js', "resources/js/pages/{$page['component']}.vue"])
 
-@inertiaHead
+    @inertiaHead
 </head>
 
 <body class="font-sans antialiased">
